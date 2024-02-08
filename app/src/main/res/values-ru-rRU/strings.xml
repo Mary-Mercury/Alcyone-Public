@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Alcyone</string>
+    <string name="settings">Настройки</string>
+    <string name="home">Главная</string>
+    <string name="schedule">Расписание</string>
+    <string name="first_group">1ая подгруппа</string>
+    <string name="second_group">2ая подгруппа</string>
+    <string name="faq">Четность недели определяется особым методом.
+        Если номер недели делится на два без остатка - это четная неделя, если нет - нечетная.
+        Как правило, первая учебная неделя является нечетной, далее они чередуются.</string>
+    <string name="retry">Повторить попытку</string>
+    <string name="wifi_off">Нет подключения к сети!</string>
+    <string name="toNightTheme">Изменить тему</string>
+    <string name="defaultBtn">системная</string>
+    <string name="dark">Тёмная</string>
+    <string name="light">Светлая</string>
+    <string name="contact">Связаться с нами</string>
+    <string name="contact_us">Наилучший способ связаться со мной - обратиться в фидбэк бот в Telegram @AlcyoneFD_bot.</string>
+    <string name="telegram">Telegram: @artemy_mv</string>
+    <string name="hiw">Как это работает?</string>
+    <string name="aboutme">Обо мне</string>
+    <string name="aboutapp">О Приложении</string>
+    <string name="verapp">Версия:</string>
+    <string name="altMode">Альтернативный режим</string>
+    <string name="about_me">Я начинающий Android-разработчик на языке Kotlin. Свободное время уделяю
+    изучению новых мобильных технологий, тестирую новомодные фичи и развиваю свой проект который должен облегчить жизнь студентам.</string>
+    <string name="about_app">Приложение разрабатывается как выпускной дипломный проект курсанта группы 3842.9 2024 г. с использованием языка программирования Kotlin, архитектуры MVVM.</string>
+    <string name="night_switch">Используйте этот переключатель чтобы включать тёмную тему.</string>
+    <string name="alt_switch">Включите, если четность не совпадает с вашим учебным расписанием. Рекомендуется перезапустить приложение для применения настроек.</string>
+    <string name="spinner_text2">Выберите вашу группу для получения актуального расписания. Рекомендуется перезапустить приложение для применения настроек.</string>
+    <string name="spinner_text">Выберите вашу группу</string>
+    <string name="class_text1">Тебе к </string>
+    <string name="class_text2">паре!</string>
+    <string name="text_dayoff">Сегодня выходной!</string>
+    <string name="loading">Загрузка…</string>
+
+
+    <string name="test">образец</string>
+    <string name="group3842">3842</string>
+    <string-array name="spinner_items">
+        <item>@string/test</item>
+        <item>@string/group3842</item>
+    </string-array>
+</resources>

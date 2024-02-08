@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="background">#FFFFFFFF</color>
+    <color name="cardview">#F6F7F9</color>
+    <color name="cardviewtext">#E1ECFE</color>
+    <color name="text">#FF000000</color>
+    <color name="cardviewtvtime">#0000FF</color>
+    <color name="cardviewtvaud">#FF0000</color>
+
+</resources>
