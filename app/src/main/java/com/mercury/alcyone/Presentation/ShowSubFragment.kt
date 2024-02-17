@@ -1,13 +1,13 @@
 package com.mercury.alcyone.Presentation
 
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -50,6 +50,10 @@ class ShowSubFragment: Fragment() {
     private lateinit var selectDataWeek: String
     private val viewModel: SecondSubGroupFragmentViewModel by activityViewModels()
     private lateinit var SingleRowCalendar: SingleRowCalendar
+    private lateinit var btnLeft: ImageButton
+    private lateinit var btnRight: ImageButton
+    private lateinit var tvDate: TextView
+    private lateinit var tvDay: TextView
 
 
     private val calendar = Calendar.getInstance()
@@ -69,6 +73,20 @@ class ShowSubFragment: Fragment() {
         tabLayout = view.findViewById(R.id.tab_layout)
         viewPager2 = view.findViewById(R.id.viewPager2)
         tvError = view.findViewById(R.id.tvError)
+        btnLeft = view.findViewById(R.id.btn_left)
+        btnRight = view.findViewById(R.id.btn_right)
+        tvDate = view.findViewById(R.id.tvDate)
+        tvDay = view.findViewById(R.id.tvDay)
+
+        calendar.time = Date()
+        currentMonth = calendar[Calendar.MONTH]
+
+        btnRight.setOnClickListener {
+            SingleRowCalendar.setDates(getDatesOfNextMonth())
+        }
+        btnLeft.setOnClickListener {
+            SingleRowCalendar.setDates(getDatesOfPreviousMonth())
+        }
 
         val adapter = AdapterTabLayout(this)
         viewPager2.adapter = adapter
@@ -79,7 +97,7 @@ class ShowSubFragment: Fragment() {
         tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 viewPager2.currentItem = tab!!.position
-                val selectedTabPosition = tab?.position ?: 0
+                val selectedTabPosition = tab.position
                 sharedPreferencesManager.saveIntData("TabPos", selectedTabPosition)
             }
             override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -103,11 +121,19 @@ class ShowSubFragment: Fragment() {
             ): Int {
                 val cal = Calendar.getInstance()
                 cal.time = date
-                return if (isSelected) {
-                    R.layout.calendar_item_selected
-                } else {
-                    R.layout.calendar_item
-                }
+                return if (isSelected)
+                when (cal[Calendar.DAY_OF_WEEK]) {
+                    Calendar.MONDAY -> R.layout.calendar_item_selected
+                    Calendar.WEDNESDAY -> R.layout.calendar_item_selected
+                    Calendar.FRIDAY -> R.layout.calendar_item_selected
+                    else -> R.layout.calendar_item_selected
+                } else
+                    when(cal[Calendar.DAY_OF_WEEK]) {
+                        Calendar.MONDAY -> R.layout.calendar_item
+                        Calendar.WEDNESDAY -> R.layout.calendar_item
+                        Calendar.FRIDAY -> R.layout.calendar_item
+                        else -> R.layout.calendar_item
+                    }
             }
 
             override fun bindDataToCalendarView(
@@ -123,6 +149,8 @@ class ShowSubFragment: Fragment() {
 
         val myCalendarChangesObserver = object : CalendarChangesObserver {
             override fun whenSelectionChanged(isSelected: Boolean, position: Int, date: Date) {
+                tvDate.text = ", ${DateUtils.getDayNumber(date)} ${DateUtils.getMonthName(date)}"
+                tvDay.text = DateUtils.getDayName(date)
                 selectData = getDayName(date).toUpperCase(Locale.ENGLISH)
                 selectDataWeek = DateUtils.getNumberOfWeek(date)
                 viewModel.filterData(selectData, selectDataWeek)
@@ -145,11 +173,9 @@ class ShowSubFragment: Fragment() {
             calendarViewManager = myCalendarViewManager
             calendarChangesObserver = myCalendarChangesObserver
             calendarSelectionManager = mySelectionManager
-            futureDaysCount = 10
-            pastDaysCount = 3
-            includeCurrentDate = true
+            setDates(getFutureDatesOfCurrentMonth())
             init()
-            select(3)
+            select(Calendar.getInstance().get(Calendar.DAY_OF_MONTH) - 1)
         }
         observeData()
         return view
@@ -189,9 +215,48 @@ class ShowSubFragment: Fragment() {
         val string = when(pos) {
             0 -> getString(R.string.test)
             1 -> getString(R.string.group3842)
+            2 -> getString(R.string.group3832)
             else -> {
             }
         }
         return string.toString()
+    }
+
+
+    private fun getDatesOfNextMonth(): List<Date> {
+        currentMonth++
+        if (currentMonth == 12) {
+            calendar.set(Calendar.YEAR, calendar[Calendar.YEAR] + 1)
+            currentMonth = 0 //
+        }
+        return getDates(mutableListOf())
+    }
+
+    private fun getDatesOfPreviousMonth(): List<Date> {
+        currentMonth--
+        if (currentMonth == -1) {
+            calendar.set(Calendar.YEAR, calendar[Calendar.YEAR] - 1)
+            currentMonth = 11
+        }
+        return getDates(mutableListOf())
+    }
+
+    private fun getFutureDatesOfCurrentMonth(): List<Date> {
+        currentMonth = calendar[Calendar.MONTH]
+        return getDates(mutableListOf())
+    }
+
+
+    private fun getDates(list: MutableList<Date>): List<Date> {
+        calendar.set(Calendar.MONTH, currentMonth)
+        calendar.set(Calendar.DAY_OF_MONTH, 1)
+        list.add(calendar.time)
+        while (currentMonth == calendar[Calendar.MONTH]) {
+            calendar.add(Calendar.DATE, +1)
+            if (calendar[Calendar.MONTH] == currentMonth)
+                list.add(calendar.time)
+        }
+        calendar.add(Calendar.DATE, -1)
+        return list
     }
 }

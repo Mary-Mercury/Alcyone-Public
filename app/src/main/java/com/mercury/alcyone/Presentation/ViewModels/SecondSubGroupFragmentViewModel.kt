@@ -28,6 +28,7 @@ class SecondSubGroupFragmentViewModel @Inject constructor(
     val filteredDataFlow: StateFlow<ApiResult<List<TableTestDto>>> get() = _filteredDataFlow
 
 
+
     fun filterData(selectDay: String, selectWeek: String) {
         val per = mySharedPreferencesManager.getData("altMode", false)
         var dayOfWeek = selectDay
@@ -47,6 +48,7 @@ class SecondSubGroupFragmentViewModel @Inject constructor(
                             table.day == dayOfWeek && table.parity == parityOFWeek
                         }
                         _filteredDataFlow.value = ApiResult.Success(filteredData)
+                        Log.e("ApiResult2", filteredDataFlow.value.toString())
                     }
                     is ApiResult.Error -> {
                         // Оставляем ошибку без изменений и сохраняем Loading в отфильтрованных данных
@@ -59,8 +61,8 @@ class SecondSubGroupFragmentViewModel @Inject constructor(
                 }
             }
         }
-    }
 
+    }
     init {
         fetchTables()
     }
@@ -77,6 +79,13 @@ class SecondSubGroupFragmentViewModel @Inject constructor(
         if (pos == 1) {
             viewModelScope.launch {
                 repository.getData3842FlowTest().collectLatest { data ->
+                    _uiState.update { data }
+                }
+            }
+        }
+        if (pos == 2) {
+            viewModelScope.launch {
+                repository.getData3832FlowTest().collectLatest { data ->
                     _uiState.update { data }
                 }
             }

@@ -38,8 +38,10 @@
 
     <string name="test">образец</string>
     <string name="group3842">3842</string>
+    <string name="group3832">3832</string>
     <string-array name="spinner_items">
         <item>@string/test</item>
         <item>@string/group3842</item>
+        <item>@string/group3832</item>
     </string-array>
 </resources>
