@@ -10,7 +10,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.createSupabaseClient
-import io.github.jan.supabase.gotrue.GoTrue
+import io.github.jan.supabase.gotrue.Auth
 import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.postgrest.postgrest
 import javax.inject.Singleton
@@ -28,7 +28,7 @@ object Supabase {
             supabaseKey = BuildConfig.API_KEY,
         ) {
             install(Postgrest)
-            install(GoTrue)
+            install(Auth)
         }
     }
 
@@ -41,8 +41,14 @@ object Supabase {
     @Provides
     @Singleton
     fun provideSubRepository(
-                             test3842: TestDataSource3842
+        test3842: TestDataSource3842
     ): Repository {
         return RepositoryImpl(test3842)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSupabase(): Supabase {
+        return Supabase
     }
 }

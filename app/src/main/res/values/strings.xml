@@ -33,12 +33,23 @@
     <string name="class_text2">class!</string>
     <string name="text_dayoff">Day off!</string>
     <string name="loading">Loading...</string>
+    <string name="longsix">The password must be at least 6 characters long</string>
+    <string name="emailformat">Invalid email format</string>
+    <string name="email">Enter email</string>
+    <string name="password">Enter password</string>
+    <string name="login">Login</string>
+    <string name="signup">Sign Up</string>
+    <string name="acc1">Didnt have an account before?</string>
+    <string name="acc2">Enter your email and password and press Sign Up!</string>
+    <string name="error">Error, check the entered data</string>
 
 
     <string name="test">Test</string>
     <string name="group3842">3842</string>
+    <string name="group3832">3832</string>
     <string-array name="spinner_items">
         <item>@string/test</item>
         <item>@string/group3842</item>
+        <item>@string/group3832</item>
     </string-array>
 </resources>

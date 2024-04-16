@@ -10,22 +10,6 @@ import javax.inject.Inject
 class TestDataSource3842 @Inject constructor(
     private val postgrest: Postgrest
 ) {
-    suspend fun getData3842(): List<TableTestDto> {
-        val result = postgrest["Schedule3842"]
-            .select {
-                order("id", Order.ASCENDING)
-            }.decodeList<TableTestDto>()
-        return result
-    }
-
-    suspend fun getExample(): List<TableTestDto> {
-        val result = postgrest["Example"]
-            .select {
-                order("id", Order.ASCENDING)
-            }.decodeList<TableTestDto>()
-        return result
-    }
-
     fun getData3842FlowTest(): Flow<ApiResult<List<TableTestDto>>> {
         return flow {
             emit(ApiResult.Loading)
@@ -46,6 +30,21 @@ class TestDataSource3842 @Inject constructor(
             emit(ApiResult.Loading)
             try {
                 val result = postgrest["Example"]
+                    .select {
+                        order("id", Order.ASCENDING)
+                    }.decodeList<TableTestDto>()
+                emit(ApiResult.Success(result))
+            } catch (e: Exception) {
+                emit(ApiResult.Error(e.message))
+            }
+        }
+    }
+
+    fun getData3832FlowTest(): Flow<ApiResult<List<TableTestDto>>> {
+        return flow {
+            emit(ApiResult.Loading)
+            try {
+                val result = postgrest["Schedule3832"]
                     .select {
                         order("id", Order.ASCENDING)
                     }.decodeList<TableTestDto>()

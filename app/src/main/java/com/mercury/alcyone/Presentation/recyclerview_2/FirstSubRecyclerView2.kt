@@ -36,7 +36,7 @@ class FirstSubRecyclerView2(var list: List<TableTestDto>): RecyclerView.Adapter<
     }
 
     fun updateData(newData: List<TableTestDto>) {
-        list = newData.takeLast(6)
+        list = newData.take(6)
         notifyDataSetChanged()
     }
 }

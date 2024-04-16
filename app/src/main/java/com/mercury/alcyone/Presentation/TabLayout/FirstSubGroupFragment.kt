@@ -52,7 +52,6 @@ class FirstSubGroupFragment : Fragment() {
                     is ApiResult.Success -> {
                         adapter.updateData(apiResult.data)
                     }
-
                     else -> {}
                 }
             }

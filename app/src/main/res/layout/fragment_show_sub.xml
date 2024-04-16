@@ -7,31 +7,103 @@
     tools:context="com.mercury.alcyone.Presentation.ShowSubFragment"
     android:background="@color/background">
 
-    <com.michalsvec.singlerowcalendar.calendar.SingleRowCalendar
-        android:id="@+id/main_single_row_calendar"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        app:deselection="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:longPress="false"
-        app:multiSelection="false" />
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/tvDay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text"
+                    android:paddingStart="10dp"
+                    android:fontFamily="@font/noto_sans"
+                    android:text="28"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/tvDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SELECT A DATE"
+                    android:textColor="@color/text"
+                    android:fontFamily="@font/noto_sans"
+                    android:textSize="18sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:id="@+id/btn_left"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/baseline_west_24"
+                    android:backgroundTint="@color/cardviewtext">
+                </ImageButton>
+
+                <ImageButton
+                    android:id="@+id/btn_right"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/baseline_east_24"
+                    android:backgroundTint="@color/cardviewtext">
+                </ImageButton>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.michalsvec.singlerowcalendar.calendar.SingleRowCalendar
+                android:id="@+id/main_single_row_calendar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:deselection="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+                app:longPress="false"
+                app:multiSelection="false" />
+        </LinearLayout>
+
+    </LinearLayout>
+
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginTop="16dp"
         android:background="@color/background"
+        app:layout_constraintBottom_toTopOf="@+id/tvError"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_single_row_calendar"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.044"
         app:tabIndicatorAnimationMode="elastic"
         app:tabIndicatorColor="@color/cardviewtext"
         app:tabTextColor="@color/text"
@@ -44,8 +116,10 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tab_layout">
+        app:layout_constraintTop_toBottomOf="@+id/tab_layout"
+        app:layout_constraintVertical_bias="1.0">
     </androidx.viewpager2.widget.ViewPager2>
 
     <TextView
@@ -80,7 +154,8 @@
             android:fontFamily="@font/noto_sans_bold"
             android:gravity="left|center"
             android:textColor="@color/text"
-            android:textSize="20sp"></TextView>
+            android:textSize="20sp">
+        </TextView>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

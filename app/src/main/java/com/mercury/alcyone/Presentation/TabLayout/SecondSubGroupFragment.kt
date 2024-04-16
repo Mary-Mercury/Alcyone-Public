@@ -65,7 +65,7 @@ class SecondSubGroupFragment : Fragment() {
                         var index = 1
                         var message: String? = null
 
-                        for (data in dataList.take(6)) {
+                        for (data in dataList.takeLast(6)) {
                             if (data.SubName != "СП") {
                                 message = getString(R.string.class_text1) + " ${data.time} "
                                 break
