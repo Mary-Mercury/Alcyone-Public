@@ -34,6 +34,15 @@
     <string name="class_text2">паре!</string>
     <string name="text_dayoff">Сегодня выходной!</string>
     <string name="loading">Загрузка…</string>
+    <string name="longsix">Пароль должен быть не менее 6 символов</string>
+    <string name="emailformat">Неверный формат email</string>
+    <string name="email">Введите email</string>
+    <string name="password">Введите пароль</string>
+    <string name="login">Авторизоваться</string>
+    <string name="signup">Зарегестрироваться</string>
+    <string name="acc1">У вас раньше не было учетной записи?</string>
+    <string name="acc2">Введите свой адрес электронной почты и пароль и нажмите Зарегистрироваться!</string>
+    <string name="error">Ошибка, проверьте введенные данные</string>
 
 
     <string name="test">образец</string>

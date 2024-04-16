@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.mercury.alcyone.Presentation.ViewModels.SecondSubGroupFragmentViewModel
 import com.example.alcyone.R
@@ -32,10 +33,25 @@ class MainActivity : AppCompatActivity() {
 
         }
         setContentView(R.layout.activity_main)
-        btnNavView = findViewById(R.id.bottomNavigationView)
-        controller = findNavController(R.id.fragmentContainerView)
-        btnNavView.setupWithNavController(controller)
 
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, BasicFragment())
+            .commit()
+
+//        btnNavView = findViewById(R.id.bottomNavigationView)
+//        controller = findNavController(R.id.fragmentContainerView)
+//        btnNavView.setupWithNavController(controller)
+
+        val token = viewModel.getToken(this)
+        if (token.isNullOrEmpty()) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, LoginFragment())
+                .commit()
+        } else {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, BasicFragment())
+                .commit()
+        }
 
         sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE)
         
