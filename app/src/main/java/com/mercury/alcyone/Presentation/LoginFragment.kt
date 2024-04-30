@@ -151,99 +151,118 @@ class LoginFragment : Fragment() {
                 Button(
                     colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.button)),
                     onClick = {
-                    val isValidEmail = android.util.Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()
-                    val isValidPassword = userPassword.length >= 6
+                        val isValidEmail =
+                            android.util.Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()
+                        val isValidPassword = userPassword.length >= 6
 
-                    if (!isValidEmail) {
-                        showErrorEmail = true
-                    } else {
-                        showErrorEmail = false
-                    }
-                    if (!isValidPassword) {
-                        showErrorPassword = true
-                    } else {
-                        showErrorPassword = false
-                    }
-                    if (isValidEmail && isValidPassword) {
-                        viewModel.login(
-                            context,
-                            userEmail,
-                            userPassword,
-                        )
-                    }
+                        if (!isValidEmail) {
+                            showErrorEmail = true
+                        } else {
+                            showErrorEmail = false
+                        }
+                        if (!isValidPassword) {
+                            showErrorPassword = true
+                        } else {
+                            showErrorPassword = false
+                        }
+                        if (isValidEmail && isValidPassword) {
+                            viewModel.login(
+                                context,
+                                userEmail,
+                                userPassword,
+                            )
+                        }
 
-                },
+                    },
                     modifier = Modifier
-                        .align(Alignment.CenterHorizontally)) {
+                        .align(Alignment.CenterHorizontally)
+                ) {
                     Text(text = getString(R.string.login))
                 }
             }
-            Column{
+            Column {
                 Text(
                     modifier = Modifier.align(Alignment.CenterHorizontally),
                     color = colorResource(R.color.text),
                     text = getString(R.string.acc1),
-                    textAlign = TextAlign.Center)
+                    textAlign = TextAlign.Center
+                )
                 Text(
                     modifier = Modifier.align(Alignment.CenterHorizontally),
                     color = colorResource(R.color.text),
                     text = getString(R.string.acc2),
-                    textAlign = TextAlign.Center)
+                    textAlign = TextAlign.Center
+                )
                 Button(
                     colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.button)),
                     onClick = {
-                    val isValidEmail = android.util.Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()
-                    val isValidPassword = userPassword.length >= 6
+                        val isValidEmail =
+                            android.util.Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()
+                        val isValidPassword = userPassword.length >= 6
 
-                    if (!isValidEmail) {
-                        showErrorEmail = true
-                    } else {
-                        showErrorEmail = false
-                    }
-                    if (!isValidPassword) {
-                        showErrorPassword = true
-                    } else {
-                        showErrorPassword = false
-                    }
-                    if (isValidEmail && isValidPassword) {
-                        viewModel.signUp(
-                            context,
-                            userEmail,
-                            userPassword,
-                        )
-                    }
-                },
-                    modifier = Modifier.align(Alignment.CenterHorizontally)) {
+                        if (!isValidEmail) {
+                            showErrorEmail = true
+                        } else {
+                            showErrorEmail = false
+                        }
+                        if (!isValidPassword) {
+                            showErrorPassword = true
+                        } else {
+                            showErrorPassword = false
+                        }
+                        if (isValidEmail && isValidPassword) {
+                            viewModel.signUp(
+                                context,
+                                userEmail,
+                                userPassword,
+                            )
+                        }
+                    },
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                ) {
                     Text(text = getString(R.string.signup))
                 }
-            }
-            val mContext = LocalContext.current
-
-            when (userState) {
-                is userState.Loading -> {
+                Button(
+                    colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.button)),
+                    onClick = {
+                        viewModel.anonymousLogin(
+                            context
+                        )
+                    },
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                ) {
+                    Text(text = getString(R.string.loginanonym),)
                 }
+                val mContext = LocalContext.current
 
-                is userState.Success -> {
-                    val message = (userState as userState.Success).message
-                    currentUserState = message
+                when (userState) {
+                    is userState.Loading -> {
+                    }
 
-                    val fragmentManager = requireActivity().supportFragmentManager
-                    val secondFragment = BasicFragment()
-                    val transaction = fragmentManager.beginTransaction()
-                    transaction.replace(R.id.fragment_container, secondFragment)
-                    transaction.addToBackStack(null)
-                    transaction.commit()
+                    is userState.Success -> {
+                        val message = (userState as userState.Success).message
+                        currentUserState = message
 
-                }
-                is userState.Error -> {
-                    val message = (userState as userState.Error).message
+                        val fragmentManager = requireActivity().supportFragmentManager
+                        val secondFragment = BasicFragment()
+                        val transaction = fragmentManager.beginTransaction()
+                        transaction.replace(R.id.fragment_container, secondFragment)
+                        transaction.addToBackStack(null)
+                        transaction.commit()
+
+                    }
+
+                    is userState.Error -> {
+                        val message = (userState as userState.Error).message
 //                    currentUserState = message
-                    currentUserState = getString(R.string.error)
+                        currentUserState = getString(R.string.error)
+                    }
+
+                    else -> {}
                 }
-                else -> {}
-            }
-            if (currentUserState.isNotEmpty()) {
-                Text(text = currentUserState)
+                if (currentUserState.isNotEmpty()) {
+                    Text(text = currentUserState)
+                }
             }
         }
     }
