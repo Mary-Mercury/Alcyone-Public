@@ -18,15 +18,14 @@ android {
         applicationId = "com.example.alcyone"
         minSdk = 26
         targetSdk = 34
-        versionCode = 6
-        versionName = "1.2.5"
+        versionCode = 7
+        versionName = "1.2.6"
 
         val localProperties = Properties()
         localProperties.load(project.rootProject.file("local.properties").inputStream())
 
         buildConfigField("String", "API_KEY", localProperties.getProperty("apiKey"))
         buildConfigField("String", "URL", localProperties.getProperty("baseUrl"))
-
 
     }
 
