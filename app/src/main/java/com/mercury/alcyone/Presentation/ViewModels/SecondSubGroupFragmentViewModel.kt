@@ -162,9 +162,11 @@ class SecondSubGroupFragmentViewModel @Inject constructor(
     //функция выхода из системы
     fun logout(context: Context) {
         viewModelScope.launch {
+            _userState.value = userState.Loading
             try {
                 supabaseClient.auth.signOut()
-                _userState.value = userState.Success("Logged user successfully!")
+                sharedPref.clearPreferences()
+                _userState.value = userState.Success("Logged out successfully!")
             } catch (e: Exception) {
                 _userState.value = userState.Error("Error: ${e.message}")
             }

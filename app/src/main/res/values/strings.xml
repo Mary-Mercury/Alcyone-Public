@@ -40,6 +40,7 @@
     <string name="login">Login</string>
     <string name="signup">Sign Up</string>
     <string name="loginanonym">Login as anonymous user</string>
+    <string name="logout">Logout</string>
     <string name="acc1">Didnt have an account before?</string>
     <string name="acc2">Enter your email and password and press Sign Up!</string>
     <string name="error">Error, check the entered data</string>
