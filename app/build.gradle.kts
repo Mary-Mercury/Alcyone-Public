@@ -18,8 +18,8 @@ android {
         applicationId = "com.example.alcyone"
         minSdk = 26
         targetSdk = 34
-        versionCode = 5
-        versionName = "1.2.4"
+        versionCode = 6
+        versionName = "1.2.5"
 
         val localProperties = Properties()
         localProperties.load(project.rootProject.file("local.properties").inputStream())

@@ -15,8 +15,10 @@ import com.mercury.alcyone.Data.sharedPref
 import com.mercury.alcyone.Data.userState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.jan.supabase.SupabaseClient
+import io.github.jan.supabase.annotations.SupabaseExperimental
 import io.github.jan.supabase.gotrue.auth
 import io.github.jan.supabase.gotrue.providers.builtin.Email
+import io.github.jan.supabase.gotrue.signInAnonymously
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -72,7 +74,6 @@ class SecondSubGroupFragmentViewModel @Inject constructor(
                 }
             }
         }
-
     }
     init {
         fetchTables()
@@ -126,6 +127,18 @@ class SecondSubGroupFragmentViewModel @Inject constructor(
         }
     }
 
+    fun anonymousLogin(context: Context,) {
+        viewModelScope.launch {
+            try {
+                supabaseClient.auth.currentUserOrNull()
+                saveToken(context)
+                _userState.value = userState.Success("Logged user successfully!")
+            } catch (e: Exception) {
+                _userState.value = userState.Error("Error: ${e.message}")
+            }
+        }
+    }
+
     //функция входа в систему
     fun login(
         context: Context,
@@ -149,9 +162,11 @@ class SecondSubGroupFragmentViewModel @Inject constructor(
     //функция выхода из системы
     fun logout(context: Context) {
         viewModelScope.launch {
+            _userState.value = userState.Loading
             try {
                 supabaseClient.auth.signOut()
-                _userState.value = userState.Success("Logged user successfully!")
+                sharedPref.clearPreferences()
+                _userState.value = userState.Success("Logged out successfully!")
             } catch (e: Exception) {
                 _userState.value = userState.Error("Error: ${e.message}")
             }

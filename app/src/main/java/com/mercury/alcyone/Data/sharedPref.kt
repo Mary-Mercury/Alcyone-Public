@@ -29,4 +29,10 @@ class sharedPref @Inject constructor(
         val sharedPreferences = context.getSharedPreferences(MY_PREF_KEY, Context.MODE_PRIVATE)
         return sharedPreferences.getString(key, null)
     }
+
+    fun clearPreferences() {
+        val sharedPreferences = context.getSharedPreferences(MY_PREF_KEY, Context.MODE_PRIVATE)
+        return sharedPreferences.edit().clear().apply()
+
+    }
 }

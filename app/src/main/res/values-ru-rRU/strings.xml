@@ -39,7 +39,9 @@
     <string name="email">Введите email</string>
     <string name="password">Введите пароль</string>
     <string name="login">Авторизоваться</string>
+    <string name="loginanonym">Авторизоваться как аноним</string>
     <string name="signup">Зарегестрироваться</string>
+    <string name="logout">Выйти</string>
     <string name="acc1">У вас раньше не было учетной записи?</string>
     <string name="acc2">Введите свой адрес электронной почты и пароль и нажмите Зарегистрироваться!</string>
     <string name="error">Ошибка, проверьте введенные данные</string>
